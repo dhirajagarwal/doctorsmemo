@@ -37,6 +37,7 @@ angular.module('doctorApp.controllers', [])
     })
 
     .controller('AddPatientCtrl', function ($scope, Data, $state, $stateParams) {
+        $scope.doctorInde = $stateParams.doctorInd;
         $scope.patient = {};
         $scope.addPatient = function () {
             var patient = {
