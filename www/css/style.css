@@ -14,3 +14,7 @@
 .pane{
     position: initial !important;
 }
+
+.title-center{
+    text-align: center !important;
+}
