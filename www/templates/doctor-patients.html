@@ -1,5 +1,5 @@
-<ion-header-bar class="bar bar-calm">
-    <h1 class="title">{{doctorDetails.name}}</h1>
+<ion-header-bar class="bar bar-positive">
+    <h1 class="title title-center">{{doctorDetails.name}}</h1>
 </ion-header-bar>
 <ion-content>
     <ion-view view-title="DoctorDetails">
@@ -10,19 +10,30 @@
             </label>
         </div>
         <ion-list>
-            <ion-item ng-repeat="patient in doctorDetails.patients | filter:searchText" ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })">
+            <ion-item ng-repeat="patient in doctorDetails.patients | filter:searchText"
+                      ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })">
                 {{ patient.name}}
             </ion-item>
         </ion-list>
     </ion-view>
 </ion-content>
-<div class="tabs tabs-icon-top">
-    <a class="tab-item"  href="#/">
-        <i class="icon ion-ios7-home calm"></i>
-        Doctors
-    </a>
-    <a class="tab-item"  ui-sref="add-patient({ doctorInd: doctorInde })">
-        <i class="icon ion-ios7-plus calm"></i>
-        Add Patient
-    </a>
-</div>
+<ion-footer-bar>
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" href="#/">
+            <i class="icon ion-ios7-home positive"></i>
+            Doctors
+        </a>
+        <a class="tab-item" ui-sref="add-patient({ doctorInd: doctorInde })">
+            <i class="icon ion-ios7-plus positive"></i>
+            Add Patient
+        </a>
+        <a class="tab-item" href="#/">
+            <i class="icon ion-ios7-compose positive"></i>
+            Edit
+        </a>
+        <a class="tab-item" href="#/">
+            <i class="icon ion-ios7-trash assertive"></i>
+            Delete
+        </a>
+    </div>
+</ion-footer-bar>
