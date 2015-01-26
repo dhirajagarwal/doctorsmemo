@@ -19,6 +19,7 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+            ionic.Platform.isFullScreen = false;
         });
     })
 
@@ -65,20 +66,4 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/');
 
-    })
-
-    .directive('patientadd', function () {
-        return {
-            restrict: 'E',
-            templateUrl: 'templates/addPatient.html',
-            scope: {
-                index: '@'
-            },
-            link: function (scope) {
-                scope.addPatient = function () {
-                    scope.$parent.addPatientData(scope.index, scope.namePatient);
-                    scope.namePatient = '';
-                };
-            }
-        }
     });
