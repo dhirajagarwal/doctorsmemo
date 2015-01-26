@@ -1,0 +1,16 @@
+.round{
+    border-radius:100%;
+}
+.mt10{
+    margin-top:10px;
+}
+.mt20{
+    margin-top:20px;
+}
+.mb20{
+    margin-bottom:20px;
+}
+
+.pane{
+    position: initial !important;
+}

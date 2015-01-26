@@ -1,0 +1,30 @@
+<ion-header-bar class="bar bar-calm">
+    <h1 class="title">Add Doctor</h1>
+</ion-header-bar>
+<ion-content>
+    <ion-view view-title="AddDoctor">
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">First Name</span>
+                <input type="text" placeholder="Dr. John" ng-model="doctor.firstname">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" placeholder="Lewis" ng-model="doctor.lastname">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Phone</span>
+                <input type="tel" placeholder="9876543210" ng-model="doctor.tel">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-calm" ng-click="addDoctor()">Add Doctor</button>
+        </div>
+    </ion-view>
+</ion-content>
+<div class="tabs tabs-icon-top">
+    <a class="tab-item"  href="#/">
+        <i class="icon ion-ios7-home calm"></i>
+        Doctors
+    </a>
+</div>
