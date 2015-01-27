@@ -8,11 +8,30 @@ angular.module('doctorApp.controllers', [])
     .controller('DoctorCtrl', function ($scope, Data) {
         $scope.allDocs = Data.allData();
 
+        $scope.search = {};
+        $scope.search.searchIcon = false;
+        $scope.search.searchText = "";
+
+        $scope.searchClicked = function(){
+            $scope.search.searchText = "";
+            $scope.search.searchIcon = !$scope.search.searchIcon;
+        }
+
     })
 
     .controller('DoctorDetailsCtrl', function ($scope, $stateParams, Data){
         $scope.doctorInde = $stateParams.doctorIndex;
         $scope.doctorDetails = Data.getDoc($stateParams.doctorIndex);
+
+        $scope.search = {};
+        $scope.search.searchIcon = false;
+        $scope.search.searchText = "";
+
+        $scope.searchClicked = function(){
+            $scope.search.searchText = "";
+            $scope.search.searchIcon = !$scope.search.searchIcon;
+        }
+
     })
 
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data){

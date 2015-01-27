@@ -3,14 +3,20 @@
 </ion-header-bar>
 <ion-content>
     <ion-view view-title="DoctorDetails">
-        <div class="list list-inset">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" ng-model="searchText" placeholder="Search Transactions">
-            </label>
+        <div class="list card">
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-card"></i>
+                {{patientDetails.address}}
+            </a>
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-ios7-telephone"></i>
+                {{patientDetails.phone}}
+            </a>
         </div>
-        <ion-list>
-            <ion-item ng-repeat="patient in doctorDetails.patients | filter:searchText">
+        <ion-list class="mt20">
+            <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
+            <ion-item ng-repeat="patient in doctorDetails.patients | filter:search.searchText"
+                      ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })">
                 {{ patient.name}}
             </ion-item>
         </ion-list>

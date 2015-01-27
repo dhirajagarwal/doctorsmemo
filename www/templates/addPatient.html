@@ -1,25 +1,25 @@
 <ion-header-bar class="bar bar-positive">
     <h1 class="title title-center">Add Patient</h1>
 </ion-header-bar>
-<ion-content>
+<ion-content class="mt20">
     <ion-view view-title="AddPatient">
         <form ng-submit="addPatient()">
             <div class="list">
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">First Name</span>
                     <input type="text" placeholder="John" required ng-model="patient.firstname">
                 </label>
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">Last Name</span>
                     <input type="text" placeholder="Lewis" required ng-model="patient.lastname">
                 </label>
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">Phone</span>
                     <input type="tel" placeholder="9876543210" required ng-model="patient.tel">
                 </label>
             </div>
             <div class="padding">
-                <button class="button button-block button-calm" type="submit">Add Patient</button>
+                <button class="button button-block button-positive" type="submit">Add Patient</button>
             </div>
         </form>
     </ion-view>

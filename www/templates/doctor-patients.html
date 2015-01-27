@@ -1,19 +1,37 @@
-<ion-header-bar class="bar bar-positive">
-    <h1 class="title title-center">{{doctorDetails.name}}</h1>
+<ion-header-bar class="bar bar-positive item-input-inset">
+    <h1 class="title title-center" ng-if="!search.searchIcon">{{doctorDetails.name}}</h1>
+
+    <div class="bar bar-header item-input-inset bar-positive" ng-if="search.searchIcon">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="search" class="positive" ng-model="search.searchText" placeholder="Search">
+        </label>
+        <button class="button button-clear" ng-click="searchClicked()">
+            Cancel
+        </button>
+    </div>
+    <button class="button button-icon icon  ion-ios7-search-strong" ng-click="searchClicked()"
+            ng-if="!search.searchIcon"></button>
 </ion-header-bar>
-<ion-content>
+<ion-content class="mt20">
     <ion-view view-title="DoctorDetails">
-        <div class="list list-inset">
-            <label class="item item-input">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" ng-model="searchText" placeholder="Search">
-            </label>
+        <div class="list card">
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-card"></i>
+                {{doctorDetails.address}}
+            </a>
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-ios7-telephone"></i>
+                {{doctorDetails.phone}}
+            </a>
         </div>
-        <ion-list>
-            <ion-item ng-repeat="patient in doctorDetails.patients | filter:searchText"
-                      ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })">
-                {{ patient.name}}
-            </ion-item>
+        <ion-list class="mt20">
+            <ion-item class="item-divider mb20 text-center">Patients</ion-item>
+            <div class="list card">
+                <a ng-repeat="patient in doctorDetails.patients | filter:search.searchText" ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })" class="item item-icon-left">
+                    <i class="icon ion-person"></i>{{ patient.name}}
+                </a>
+            </div>
         </ion-list>
     </ion-view>
 </ion-content>
