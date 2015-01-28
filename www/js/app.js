@@ -62,6 +62,12 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 controller: 'AddDoctorCtrl'
             })
 
+            .state('add-txn', {
+                url: '/txnAdd/:patientIndex/:doctorInd',
+                templateUrl: 'templates/addTxn.html',
+                controller: 'AddTxnCtrl'
+            })
+
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/');

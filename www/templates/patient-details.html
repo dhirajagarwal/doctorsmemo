@@ -52,11 +52,11 @@
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
             <div class="list card">
-                <a ng-repeat="txn in patientDetails.transactions" href="#/" style="text-decoration:none;">
+                <a ng-repeat="txn in patientDetails.transactions" style="text-decoration:none;">
                     <div class="row">
                         <div class="col-20">
                             <div class="mt10 item item-icon-left">
-                                <i class="icon"><strong ng-bind="txn.type === 'Payment' ? 'P' : 'R'"></strong></i>
+                                <i class="icon"><strong ng-bind="txn.payment === false ? 'P' : 'R'"></strong></i>
                             </div>
                         </div>
                         <div style="width: 45%">
@@ -83,7 +83,7 @@
             <i class="icon ion-ios7-home positive"></i>
             Doctors
         </a>
-        <a class="tab-item" ui-sref="add-patient({ doctorInd: doctorInde })">
+        <a class="tab-item" href="#/txnAdd/{{patientInd}}/{{doctorIndex}}">
             <i class="icon ion-ios7-plus positive"></i>
             Add Transaction
         </a>

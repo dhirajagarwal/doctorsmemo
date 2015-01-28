@@ -24,11 +24,11 @@ angular.module('doctorApp.services', [])
                 startDate: '12/12/2014',
                 endDate: '23/11/2015',
                 transactions: [{
-                    type: 'Payment',
+                    payment: true,
                     date: '15/12/2014',
                     amount: 4000
                 }, {
-                    type: 'Receipt',
+                    payment: false,
                     date: '20/5/2015',
                     amount: 3000
                 }]
@@ -42,11 +42,11 @@ angular.module('doctorApp.services', [])
                 startDate: '12/12/2014',
                 endDate: '23/11/2015',
                 transactions: [{
-                    type: 'Payment',
+                    payment: true,
                     date: '15/12/2014',
                     amount: 4000
                 }, {
-                    type: 'Receipt',
+                    payment: false,
                     date: '20/5/2015',
                     amount: 3000
                 }]
@@ -68,11 +68,11 @@ angular.module('doctorApp.services', [])
                 startDate: '12/12/2014',
                 endDate: '23/11/2015',
                 transactions: [{
-                    type: 'Payment',
+                    payment: false,
                     date: '15/12/2014',
                     amount: 4000
                 }, {
-                    type: 'Receipt',
+                    payment: true,
                     date: '20/5/2015',
                     amount: 3000
                 }]
@@ -86,11 +86,11 @@ angular.module('doctorApp.services', [])
                 startDate: '12/12/2014',
                 endDate: '23/11/2015',
                 transactions: [{
-                    type: 'Payment',
+                    payment: false,
                     date: '15/12/2014',
                     amount: 4000
                 }, {
-                    type: 'Receipt',
+                    payment: true,
                     date: '20/5/2015',
                     amount: 3000
                 }]
@@ -113,11 +113,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: true,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: false,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -131,11 +131,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: true,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: false,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -158,11 +158,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: false,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: true,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -176,11 +176,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: false,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: true,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -203,11 +203,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: false,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: true,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -221,11 +221,11 @@ angular.module('doctorApp.services', [])
                     startDate: '12/12/2014',
                     endDate: '23/11/2015',
                     transactions: [{
-                        type: 'Payment',
+                        payment: false,
                         date: '15/12/2014',
                         amount: 4000
                     }, {
-                        type: 'Receipt',
+                        payment: true,
                         date: '20/5/2015',
                         amount: 3000
                     }]
@@ -247,6 +247,9 @@ angular.module('doctorApp.services', [])
             },
             addPat: function (patient, doctorIndex) {
                 data[doctorIndex].patients.push(patient);
+            },
+            addTxn: function (txn, doctorIndex, patientIndex){
+                data[doctorIndex].patients[patientIndex].transactions.push(txn);
             }
         }
     });
