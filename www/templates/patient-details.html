@@ -1,24 +1,79 @@
-<ion-header-bar class="bar bar-positive">
-    <h1 class="title title-center">{{patientDetails.name}}</h1>
+<ion-header-bar class="bar bar-positive item-input-inset">
+    <a href="#/doctor-patients/{{doctorIndex}}" class="button button-icon ion-ios7-arrow-back">
+    </a>
+    <h1 class="title ml70">{{patientDetails.name}}</h1>
 </ion-header-bar>
 <ion-content>
     <ion-view view-title="DoctorDetails">
         <div class="list card">
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-card"></i>
-                {{patientDetails.address}}
-            </a>
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-ios7-telephone"></i>
-                {{patientDetails.phone}}
-            </a>
+            <div class="row">
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-medkit"></i>
+                        {{patientDetails.illness}}
+                    </div>
+                </div>
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-ios7-telephone"></i>
+                        {{patientDetails.phone}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-cash"></i>
+                        Rs. {{patientDetails.amount}}
+                    </div>
+                </div>
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-ios7-pie-outline"></i>
+                        Rs. {{patientDetails.share}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-calendar"></i>
+                        {{patientDetails.startDate}}
+                    </div>
+                </div>
+                <div class="col-50">
+                    <div class="item item-icon-left">
+                        <i class="icon ion-calendar"></i>
+                        {{patientDetails.endDate}}
+                    </div>
+                </div>
+            </div>
         </div>
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
-            <ion-item ng-repeat="patient in doctorDetails.patients | filter:search.searchText"
-                      ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })">
-                {{ patient.name}}
-            </ion-item>
+            <div class="list card">
+                <a ng-repeat="txn in patientDetails.transactions" href="#/" style="text-decoration:none;">
+                    <div class="row">
+                        <div class="col-20">
+                            <div class="mt10 item item-icon-left">
+                                <i class="icon"><strong ng-bind="txn.type === 'Payment' ? 'P' : 'R'"></strong></i>
+                            </div>
+                        </div>
+                        <div style="width: 45%">
+                            <div class="item item-icon-left">
+                                <i class="icon ion-calendar"></i>
+                                {{txn.date}}
+                            </div>
+                        </div>
+                        <div class="col-40">
+                            <div class="item item-icon-left">
+                                <i class="icon ion-cash"></i>
+                                {{txn.amount}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </ion-list>
     </ion-view>
 </ion-content>
@@ -27,10 +82,6 @@
         <a class="tab-item" href="#/">
             <i class="icon ion-ios7-home positive"></i>
             Doctors
-        </a>
-        <a class="tab-item" href="#/">
-            <i class="icon ion-ios7-arrow-back positive"></i>
-            Patients
         </a>
         <a class="tab-item" ui-sref="add-patient({ doctorInd: doctorInde })">
             <i class="icon ion-ios7-plus positive"></i>

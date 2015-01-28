@@ -1,5 +1,7 @@
 <ion-header-bar class="bar bar-positive">
-    <h1 class="title title-center">Add Patient</h1>
+    <a href="#/doctor-patients/{{doctorInde}}" class="button button-icon ion-ios7-arrow-back">
+    </a>
+    <h1 class="title ml70">Add Patient</h1>
 </ion-header-bar>
 <ion-content class="mt20">
     <ion-view view-title="AddPatient">
@@ -12,6 +14,18 @@
                 <label class="item item-input">
                     <span class="input-label">Last Name</span>
                     <input type="text" placeholder="Lewis" required ng-model="patient.lastname">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Illness</span>
+                    <input type="text" placeholder="Sickness" required ng-model="patient.illness">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <input type="text" placeholder="12/12/2012" required ng-model="patient.startDate">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Date</span>
+                    <input type="text" placeholder="12/12/2012" required ng-model="patient.endDate">
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Phone</span>

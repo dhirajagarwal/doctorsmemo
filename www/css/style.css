@@ -10,7 +10,9 @@
 .mb20{
     margin-bottom:20px;
 }
-
+.ml70{
+    margin-left: 70px !important;
+}
 .pane{
     position: initial !important;
 }

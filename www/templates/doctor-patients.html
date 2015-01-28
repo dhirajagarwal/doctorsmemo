@@ -1,6 +1,7 @@
 <ion-header-bar class="bar bar-positive item-input-inset">
-    <h1 class="title title-center" ng-if="!search.searchIcon">{{doctorDetails.name}}</h1>
-
+    <a href="#/" ng-if="!search.searchIcon" class="button button-icon ion-ios7-arrow-back">
+    </a>
+    <h1 class="title" ng-if="!search.searchIcon">{{doctorDetails.name}}</h1>
     <div class="bar bar-header item-input-inset bar-positive" ng-if="search.searchIcon">
         <label class="item-input-wrapper">
             <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -13,7 +14,7 @@
     <button class="button button-icon icon  ion-ios7-search-strong" ng-click="searchClicked()"
             ng-if="!search.searchIcon"></button>
 </ion-header-bar>
-<ion-content class="mt20">
+<ion-content>
     <ion-view view-title="DoctorDetails">
         <div class="list card">
             <a href="#" class="item item-icon-left">

@@ -35,6 +35,7 @@ angular.module('doctorApp.controllers', [])
     })
 
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data){
+        $scope.doctorIndex = $stateParams.doctorInd;
         $scope.patientDetails = Data.getDoc($stateParams.doctorInd).patients[$stateParams.patientIndex]
     })
 
@@ -61,10 +62,14 @@ angular.module('doctorApp.controllers', [])
         $scope.addPatient = function () {
             var patient = {
                 name: $scope.patient.firstname + ' ' + $scope.patient.lastname,
-                address: '',
+                illness: $scope.patient.illness,
                 phone: $scope.patient.tel,
                 amount: 0,
-                edit: false
+                edit: false,
+                startDate : $scope.patient.startDate,
+                endDate : $scope.patient.endDate,
+                share: 0,
+                transactions:[]
             };
             Data.addPat(patient, $stateParams.doctorInd);
             $state.go('doctor-details', {doctorIndex : $stateParams.doctorInd});
