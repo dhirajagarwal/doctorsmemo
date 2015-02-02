@@ -25,9 +25,15 @@ angular.module('doctorApp.controllers', [])
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
 
+
         $scope.searchClicked = function () {
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
+        }
+
+        $scope.doctorfunc = {};
+        $scope.doctorfunc.removeDoc = function (doctorInd) {
+            Data.removeDoc(doctorInd);
         }
 
     })
@@ -35,10 +41,12 @@ angular.module('doctorApp.controllers', [])
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data) {
         $scope.doctorIndex = $stateParams.doctorInd;
         $scope.patientInd = $stateParams.patientIndex;
-        console.log($scope.patientInd);
-        //$scope.patientDetails = Data.getDoc($stateParams.doctorInd).patients[$stateParams.patientIndex]
         $scope.patientDetails = Data.getPatient($stateParams.patientIndex, $stateParams.doctorInd);
-        console.log($scope.patientDetails);
+
+        $scope.patientfunc = {};
+        $scope.patientfunc.removePat = function (patientInd, doctorInd) {
+            Data.removePatient(patientInd,doctorInd);
+        }
     })
 
     .controller('AddDoctorCtrl', function ($scope, Data, $state) {

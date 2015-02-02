@@ -23,6 +23,12 @@ angular.module('doctorApp.services', [])
             return data;
         };
 
+        dataFactory.removeDoc = function (index) {
+            var ref = new Firebase(baseUrl + index);
+            var data = $firebase(ref).$asObject();
+            data.$remove();
+        };
+
         dataFactory.getPatient = function (patient, doctorIndex) {
             var url = baseUrl + doctorIndex + '/patients/' + patient;
             var ref = new Firebase(url);
@@ -30,11 +36,17 @@ angular.module('doctorApp.services', [])
             return data;
         };
 
+        dataFactory.removePatient = function (patient, doctorIndex) {
+            var url = baseUrl + doctorIndex + '/patients/' + patient;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            data.$remove();
+        };
+
         dataFactory.addDoc = function (doctor) {
             var ref = new Firebase(baseUrl);
             var data = $firebase(ref).$asArray();
             data.$add(doctor);
-            //data.put(doctor);
         };
 
         dataFactory.addPat = function (patient, doctorIndex) {
@@ -55,228 +67,3 @@ angular.module('doctorApp.services', [])
         return dataFactory;
 
     });
-
-/*var data =[{
- name: 'Dr. Batra',
- address: 'Karve Nagar',
- phone: '9970428444',
- amount: 5000,
- due: 3000,
- edit: false,
- patients: [{
- name: 'Dhiraj Agarwal',
- illness: 'Root Canal',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: true,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: false,
- date: '20/5/2015',
- amount: 3000
- }]
- }, {
- name: 'Poonam Agarwal',
- illness: 'Dental Braces',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: true,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: false,
- date: '20/5/2015',
- amount: 3000
- }]
- }]
- }, {
- name: 'Dr. Sohoni',
- address: 'Aundh',
- phone: '9970428444',
- amount: 6000,
- due: 2000,
- edit: false,
- patients: [{
- name: 'Suresh Agarwal',
- illness: 'Gingivitis',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }, {
- name: 'Usha Agarwal',
- illness: 'Periodontitis',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }]
- },
- {
- name: 'Dr. Deshpande',
- address: 'Aundh',
- phone: '9970428444',
- amount: 6000,
- due: 2000,
- edit: false,
- patients: [{
- name: 'Sushil Bansal',
- illness: 'Root Canal',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: true,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: false,
- date: '20/5/2015',
- amount: 3000
- }]
- }, {
- name: 'Jatin Bansal',
- illness: 'Gum swelling',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: true,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: false,
- date: '20/5/2015',
- amount: 3000
- }]
- }]
- },
- {
- name: 'Dr. Sawarkar',
- address: 'Aundh',
- phone: '9970428444',
- amount: 6000,
- due: 2000,
- edit: false,
- patients: [{
- name: 'Himanshu Agarwal',
- illness: 'Toothace',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }, {
- name: 'Anup Agarwal',
- illness: 'Tooth Erosion',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }]
- },
- {
- name: 'Dr. Phadke',
- address: 'Aundh',
- phone: '9970428444',
- amount: 6000,
- due: 2000,
- edit: false,
- patients: [{
- name: 'Ashish Agarwal',
- illness: 'Mouth Sores',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }, {
- name: 'Ritu Agarwal',
- illness: 'Tooth Decay',
- phone: '9970428444',
- amount: 5000,
- share: 2000,
- edit: false,
- startDate: '12/12/2014',
- endDate: '23/11/2015',
- transactions: [{
- payment: false,
- date: '15/12/2014',
- amount: 4000
- }, {
- payment: true,
- date: '20/5/2015',
- amount: 3000
- }]
- }]
- }];*/
