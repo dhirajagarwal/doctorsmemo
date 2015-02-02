@@ -7,40 +7,53 @@ angular.module('doctorApp.services', [])
         // Might use a resource here that returns a JSON array
 
         // Some fake testing data
-        var url = 'https://doctormemo.firebaseio.com/';
-        var ref = new Firebase(url);
+        var dataFactory = {};
+        var baseUrl = 'https://doctormemo.firebaseio.com/';
 
-        var data = $firebase(ref).$asArray();
+        dataFactory.allData = function () {
+            var ref = new Firebase(baseUrl);
+            var data = $firebase(ref).$asArray();
+            return data;
+        };
 
-        return {
-            allData: function () {
-                return data;
-            },
-            removeDoc: function (index) {
-                chats.splice(data[index], 1);
-            },
-            getDoc: function (index) {
-                for(var i=0;i<data.length;i++){
-                  if(index === data[i].$id){
-                   return data[i];
-                  }
-                }
-            },
-            addDoc: function (doctor) {
-                data.$add(doctor);
-                //data.put(doctor);
-            },
-            addPat: function (patient, doctorIndex) {
-                var patientUrl = url+doctorIndex+'/patients';
-                var patientsRef = new Firebase(patientUrl);
-                var sync = $firebase(patientsRef).$asArray();
-                sync.$add(patient);
+        dataFactory.getDoc = function (index) {
+            var url = baseUrl + index;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            return data;
+        };
 
-            },
-            addTxn: function (txn, doctorIndex, patientIndex){
-                data[doctorIndex].patients[patientIndex].transactions.push(txn);
-            }
-        }
+        dataFactory.getPatient = function (patient, doctorIndex) {
+            var url = baseUrl + doctorIndex + '/patients/' + patient;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            return data;
+        };
+
+        dataFactory.addDoc = function (doctor) {
+            var ref = new Firebase(baseUrl);
+            var data = $firebase(ref).$asArray();
+            data.$add(doctor);
+            //data.put(doctor);
+        };
+
+        dataFactory.addPat = function (patient, doctorIndex) {
+            var patientUrl = baseUrl + doctorIndex + '/patients';
+            var patientsRef = new Firebase(patientUrl);
+            var sync = $firebase(patientsRef).$asArray();
+            sync.$add(patient);
+
+        };
+
+        dataFactory.addTxn = function (txn, doctorIndex, patientIndex) {
+            var txnUrl = baseUrl + doctorIndex + '/patients/' + patientIndex + '/transactions/';
+            var patientsRef = new Firebase(txnUrl);
+            var sync = $firebase(patientsRef).$asArray();
+            sync.$add(txn);
+        };
+
+        return dataFactory;
+
     });
 
 /*var data =[{

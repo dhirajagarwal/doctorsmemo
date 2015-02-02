@@ -34,35 +34,41 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
             // setup an abstract state for the tabs directive
             .state('doctors', {
                 url: "/",
+                cache: false,
                 templateUrl: "templates/doctors.html",
                 controller: 'DoctorCtrl'
             })
 
             .state('doctor-details', {
                 url: '/doctor-patients/:doctorIndex',
+                cache: false,
                 templateUrl: 'templates/doctor-patients.html',
                 controller: 'DoctorDetailsCtrl'
             })
 
             .state('patient-details', {
                 url: '/patientDetails/:patientIndex/:doctorInd',
+                cache: false,
                 templateUrl: 'templates/patient-details.html',
                 controller: 'PatientDetailsCtrl'
             })
 
             .state('add-patient', {
                 url: '/addPatient/:doctorInd',
+                cache: false,
                 templateUrl: 'templates/addPatient.html',
                 controller: 'AddPatientCtrl'
             })
 
             .state('add-doctor', {
+                cache: false,
                 url: '/doctorAdd',
                 templateUrl: 'templates/addDoctor.html',
                 controller: 'AddDoctorCtrl'
             })
 
             .state('add-txn', {
+                cache: false,
                 url: '/txnAdd/:patientIndex/:doctorInd',
                 templateUrl: 'templates/addTxn.html',
                 controller: 'AddTxnCtrl'

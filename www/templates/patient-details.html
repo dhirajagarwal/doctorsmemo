@@ -52,23 +52,23 @@
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
             <div class="list card">
-                <a ng-repeat="txn in patientDetails.transactions" style="text-decoration:none;">
+                <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;">
                     <div class="row">
                         <div class="col-20">
                             <div class="mt10 item item-icon-left">
-                                <i class="icon"><strong ng-bind="txn.payment === false ? 'P' : 'R'"></strong></i>
+                                <i class="icon"><strong ng-bind="data.payment === false ? 'P' : 'R'"></strong></i>
                             </div>
                         </div>
                         <div style="width: 45%">
                             <div class="item item-icon-left">
                                 <i class="icon ion-calendar"></i>
-                                {{txn.date}}
+                                {{data.date}}
                             </div>
                         </div>
                         <div class="col-40">
                             <div class="item item-icon-left">
                                 <i class="icon ion-cash"></i>
-                                {{txn.amount}}
+                                {{data.amount}}
                             </div>
                         </div>
                     </div>

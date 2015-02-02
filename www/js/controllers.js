@@ -11,13 +11,13 @@ angular.module('doctorApp.controllers', [])
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
 
-        $scope.searchClicked = function(){
+        $scope.searchClicked = function () {
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
         }
     })
 
-    .controller('DoctorDetailsCtrl', function ($scope, $stateParams, Data){
+    .controller('DoctorDetailsCtrl', function ($scope, $stateParams, Data) {
         $scope.doctorInde = $stateParams.doctorIndex;
         $scope.doctorDetails = Data.getDoc($stateParams.doctorIndex);
 
@@ -25,18 +25,20 @@ angular.module('doctorApp.controllers', [])
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
 
-        $scope.searchClicked = function(){
+        $scope.searchClicked = function () {
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
         }
 
     })
 
-    .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data){
+    .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data) {
         $scope.doctorIndex = $stateParams.doctorInd;
         $scope.patientInd = $stateParams.patientIndex;
         console.log($scope.patientInd);
-        $scope.patientDetails = Data.getDoc($stateParams.doctorInd).patients[$stateParams.patientIndex]
+        //$scope.patientDetails = Data.getDoc($stateParams.doctorInd).patients[$stateParams.patientIndex]
+        $scope.patientDetails = Data.getPatient($stateParams.patientIndex, $stateParams.doctorInd);
+        console.log($scope.patientDetails);
     })
 
     .controller('AddDoctorCtrl', function ($scope, Data, $state) {
@@ -49,7 +51,7 @@ angular.module('doctorApp.controllers', [])
                 amount: 0,
                 due: 0,
                 edit: false,
-                patients:[{}]
+                patients: [{}]
             };
             Data.addDoc(doc);
             $state.go('doctors');
@@ -63,7 +65,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txn.payment = false;
         $scope.addTxn = function () {
             var txn = {
-                payment : $scope.txn.payment,
+                payment: $scope.txn.payment,
                 amount: $scope.txn.amount,
                 date: $scope.txn.date
             };
@@ -82,12 +84,12 @@ angular.module('doctorApp.controllers', [])
                 phone: $scope.patient.tel,
                 amount: 0,
                 edit: false,
-                startDate : $scope.patient.startDate,
-                endDate : $scope.patient.endDate,
+                startDate: $scope.patient.startDate,
+                endDate: $scope.patient.endDate,
                 share: 0,
-                transactions:[]
+                transactions: []
             };
             Data.addPat(patient, $stateParams.doctorInd);
-            $state.go('doctor-details', {doctorIndex : $stateParams.doctorInd});
+            $state.go('doctor-details', {doctorIndex: $stateParams.doctorInd});
         }
     });
