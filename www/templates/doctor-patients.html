@@ -29,8 +29,8 @@
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Patients</ion-item>
             <div class="list card">
-                <a ng-repeat="patient in doctorDetails.patients | filter:search.searchText" ui-sref="patient-details({ patientIndex: $index, doctorInd: doctorInde })" class="item item-icon-left">
-                    <i class="icon ion-person"></i>{{ patient.name}}
+                <a ng-repeat="(key, data) in doctorDetails.patients | filter:search.searchText" ui-sref="patient-details({ patientIndex: key, doctorInd: doctorInde })" class="item item-icon-left">
+                    <i class="icon ion-person"></i>{{ data.name}}
                 </a>
             </div>
         </ion-list>

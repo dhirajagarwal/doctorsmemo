@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controllers'])
+angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controllers', 'firebase'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {

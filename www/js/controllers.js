@@ -7,7 +7,6 @@ angular.module('doctorApp.controllers', [])
 
     .controller('DoctorCtrl', function ($scope, Data) {
         $scope.allDocs = Data.allData();
-
         $scope.search = {};
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
@@ -16,7 +15,6 @@ angular.module('doctorApp.controllers', [])
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
         }
-
     })
 
     .controller('DoctorDetailsCtrl', function ($scope, $stateParams, Data){
@@ -37,6 +35,7 @@ angular.module('doctorApp.controllers', [])
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data){
         $scope.doctorIndex = $stateParams.doctorInd;
         $scope.patientInd = $stateParams.patientIndex;
+        console.log($scope.patientInd);
         $scope.patientDetails = Data.getDoc($stateParams.doctorInd).patients[$stateParams.patientIndex]
     })
 
@@ -44,13 +43,13 @@ angular.module('doctorApp.controllers', [])
         $scope.doctor = {};
         $scope.addDoctor = function () {
             var doc = {
-                name: $scope.doctor.firstname + ' ' + $scope.doctor.lastname,
-                address: '',
+                name: $scope.doctor.name,
+                address: $scope.doctor.address,
                 phone: $scope.doctor.tel,
                 amount: 0,
                 due: 0,
                 edit: false,
-                patients:[]
+                patients:[{}]
             };
             Data.addDoc(doc);
             $state.go('doctors');
@@ -78,7 +77,7 @@ angular.module('doctorApp.controllers', [])
         $scope.patient = {};
         $scope.addPatient = function () {
             var patient = {
-                name: $scope.patient.firstname + ' ' + $scope.patient.lastname,
+                name: $scope.patient.name,
                 illness: $scope.patient.illness,
                 phone: $scope.patient.tel,
                 amount: 0,
