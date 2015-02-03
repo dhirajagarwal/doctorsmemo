@@ -23,6 +23,14 @@ angular.module('doctorApp.services', [])
             return data;
         };
 
+        dataFactory.editDoc = function (index, doc) {
+            var url = baseUrl + index;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            data = doc;
+            data.$save();
+        };
+
         dataFactory.removeDoc = function (index) {
             var ref = new Firebase(baseUrl + index);
             var data = $firebase(ref).$asObject();

@@ -67,6 +67,13 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 controller: 'AddDoctorCtrl'
             })
 
+            .state('edit-doctor', {
+                url: '/editDoctor/:doctorIndex',
+                cache: false,
+                templateUrl: 'templates/addDoctor.html',
+                controller: 'EditDoctorCtrl'
+            })
+
             .state('add-txn', {
                 cache: false,
                 url: '/txnAdd/:patientIndex/:doctorInd',

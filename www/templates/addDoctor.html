@@ -1,9 +1,9 @@
 <ion-header-bar class="bar bar-positive">
-    <h1 class="title title-center">Add Doctor</h1>
+    <h1 class="title title-center">{{txtFields.header}}</h1>
 </ion-header-bar>
 <ion-content class="mt20">
     <ion-view view-title="AddDoctor">
-        <form ng-submit="addDoctor()">
+        <form ng-submit="docFuncs.buttonAction()">
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Name</span>
@@ -15,11 +15,11 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Phone</span>
-                    <input type="tel" placeholder="9876543210" required ng-model="doctor.tel">
+                    <input type="tel" placeholder="9876543210" required ng-model="doctor.phone">
                 </label>
             </div>
             <div class="padding">
-                <button class="button button-block button-positive" type="submit">Add Doctor</button>
+                <button class="button button-block button-positive" type="submit">{{txtFields.buttonTxt}}</button>
             </div>
         </form>
     </ion-view>

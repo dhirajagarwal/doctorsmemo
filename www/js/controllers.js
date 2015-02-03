@@ -25,7 +25,6 @@ angular.module('doctorApp.controllers', [])
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
 
-
         $scope.searchClicked = function () {
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
@@ -51,17 +50,33 @@ angular.module('doctorApp.controllers', [])
 
     .controller('AddDoctorCtrl', function ($scope, Data, $state) {
         $scope.doctor = {};
-        $scope.addDoctor = function () {
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Add Doctor';
+        $scope.txtFields.buttonTxt = 'Add Doctor';
+
+        $scope.docFuncs = {};
+        $scope.docFuncs.buttonAction = function (){
             var doc = {
                 name: $scope.doctor.name,
                 address: $scope.doctor.address,
-                phone: $scope.doctor.tel,
-                amount: 0,
-                due: 0,
-                edit: false,
-                patients: [{}]
+                phone: $scope.doctor.phone
             };
             Data.addDoc(doc);
+            $state.go('doctors');
+        }
+    })
+
+    .controller('EditDoctorCtrl', function ($scope, $state, $stateParams, Data) {
+        $scope.doctorInde = $stateParams.doctorIndex;
+        $scope.doctor = Data.getDoc($stateParams.doctorIndex);
+
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Edit Doctor';
+        $scope.txtFields.buttonTxt = 'Submit';
+
+        $scope.docFuncs = {};
+        $scope.docFuncs.buttonAction = function (){
+            Data.editDoc($stateParams.doctorIndex, $scope.doctor);
             $state.go('doctors');
         }
     })
