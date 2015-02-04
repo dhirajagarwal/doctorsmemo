@@ -7,28 +7,34 @@
     <ion-view view-title="AddPatient">
         <form ng-submit="patFuncs.buttonAction()">
             <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Name</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-person"></i>
+                    <span class="input-label ml35">Name</span>
                     <input type="text" placeholder="John" required ng-model="patient.name">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Illness</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-medkit"></i>
+                    <span class="input-label ml35">Illness</span>
                     <input type="text" placeholder="Sickness" required ng-model="patient.illness">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Start Date</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-calendar"></i>
+                    <span class="input-label ml35">Start Date</span>
                     <input type="tel" placeholder="12-12-2012" required ng-model="patient.startDate">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Phone</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-ios7-telephone"></i>
+                    <span class="input-label ml35">Phone</span>
                     <input type="tel" placeholder="9876543210" required ng-model="patient.phone">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Fees</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-cash"></i>
+                    <span class="input-label ml35">Fees</span>
                     <input type="tel" placeholder="Treatment Fees" required ng-model="patient.fees">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Share</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-ios7-pie-outline"></i>
+                    <span class="input-label ml35">Share</span>
                     <input type="tel" placeholder="Doctor's Share" required ng-model="patient.share">
                 </label>
             </div>
