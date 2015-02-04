@@ -100,11 +100,17 @@ angular.module('doctorApp.controllers', [])
     .controller('AddPatientCtrl', function ($scope, Data, $state, $stateParams) {
         $scope.doctorInde = $stateParams.doctorInd;
         $scope.patient = {};
-        $scope.addPatient = function () {
+
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Add Patient';
+        $scope.txtFields.buttonTxt = 'Add Patient';
+
+        $scope.patFuncs = {};
+        $scope.patFuncs.buttonAction = function () {
             var patient = {
                 name: $scope.patient.name,
                 illness: $scope.patient.illness,
-                phone: $scope.patient.tel,
+                phone: $scope.patient.phone,
                 amount: 0,
                 edit: false,
                 startDate: $scope.patient.startDate,
@@ -115,4 +121,21 @@ angular.module('doctorApp.controllers', [])
             Data.addPat(patient, $stateParams.doctorInd);
             $state.go('doctor-details', {doctorIndex: $stateParams.doctorInd});
         }
+    })
+
+    .controller('EditPatientCtrl', function ($scope, Data, $state, $stateParams) {
+        $scope.doctorInde = $stateParams.doctorInd;
+        $scope.patientInd = $stateParams.patientIndex;
+        $scope.patient = Data.getPatient($stateParams.patientIndex, $stateParams.doctorInd);
+
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Edit Patient';
+        $scope.txtFields.buttonTxt = 'Submit';
+
+        $scope.patFuncs = {};
+        $scope.patFuncs.buttonAction = function (){
+            Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
+            $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
+        }
+
     });
