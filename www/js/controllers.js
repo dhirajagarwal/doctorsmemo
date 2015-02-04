@@ -44,7 +44,7 @@ angular.module('doctorApp.controllers', [])
 
         $scope.patientfunc = {};
         $scope.patientfunc.removePat = function (patientInd, doctorInd) {
-            Data.removePatient(patientInd,doctorInd);
+            Data.removePatient(patientInd, doctorInd);
         }
     })
 
@@ -55,7 +55,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txtFields.buttonTxt = 'Add Doctor';
 
         $scope.docFuncs = {};
-        $scope.docFuncs.buttonAction = function (){
+        $scope.docFuncs.buttonAction = function () {
             var doc = {
                 name: $scope.doctor.name,
                 address: $scope.doctor.address,
@@ -75,7 +75,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txtFields.buttonTxt = 'Submit';
 
         $scope.docFuncs = {};
-        $scope.docFuncs.buttonAction = function (){
+        $scope.docFuncs.buttonAction = function () {
             Data.editDoc($stateParams.doctorIndex, $scope.doctor);
             $state.go('doctors');
         }
@@ -89,9 +89,17 @@ angular.module('doctorApp.controllers', [])
         $scope.addTxn = function () {
             var txn = {
                 payment: $scope.txn.payment,
-                amount: $scope.txn.amount,
                 date: $scope.txn.date
             };
+            if ($scope.txn.patient !== undefined) {
+                txn.patient = $scope.txn.patient;
+            }
+            if ($scope.txn.material !== undefined) {
+                txn.material = $scope.txn.material;
+            }
+            if ($scope.txn.visdoc !== undefined) {
+                txn.visdoc = $scope.txn.visdoc;
+            }
             Data.addTxn(txn, $stateParams.doctorInd, $stateParams.patientIndex);
             $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
@@ -111,11 +119,9 @@ angular.module('doctorApp.controllers', [])
                 name: $scope.patient.name,
                 illness: $scope.patient.illness,
                 phone: $scope.patient.phone,
-                amount: 0,
-                edit: false,
                 startDate: $scope.patient.startDate,
-                endDate: $scope.patient.endDate,
-                share: 0,
+                fees: $scope.patient.fees,
+                share: $scope.patient.share,
                 transactions: []
             };
             Data.addPat(patient, $stateParams.doctorInd);
@@ -133,7 +139,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txtFields.buttonTxt = 'Submit';
 
         $scope.patFuncs = {};
-        $scope.patFuncs.buttonAction = function (){
+        $scope.patFuncs.buttonAction = function () {
             Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
             $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }

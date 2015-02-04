@@ -5,16 +5,24 @@
 </ion-header-bar>
 <ion-content class="mt20">
     <ion-view view-title="AddDoctor">
-        <form ng-submit="addTxn()">
+        <form name="form" ng-submit="addTxn()">
             <div class="list">
                     <ion-toggle ng-model="txn.payment" toggle-class="toggle-positive">Txn Type (Payment / Receipt)</ion-toggle>
                 <label class="item item-input">
                     <span class="input-label">Txn Date</span>
-                    <input type="text" placeholder="12/12/2012" required ng-model="txn.date">
+                    <input type="tel" placeholder="12-12-2012" ng-required="true" ng-model="txn.date">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Amount</span>
-                    <input type="tel" placeholder="5000" required ng-model="txn.amount">
+                    <span class="input-label">By Patient</span>
+                    <input type="tel" placeholder="5000" ng-required='!txn.visdoc && !txn.material' ng-model="txn.patient">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Material</span>
+                    <input type="tel" placeholder="3000" ng-required='!txn.patient && !txn.visdoc' ng-model="txn.material">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Visiting Doc</span>
+                    <input type="tel" placeholder="2000" ng-required='!txn.patient && !txn.material' ng-model="txn.visdoc">
                 </label>
             </div>
             <div class="padding">
