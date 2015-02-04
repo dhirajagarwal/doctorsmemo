@@ -5,16 +5,19 @@
     <ion-view view-title="AddDoctor">
         <form ng-submit="docFuncs.buttonAction()">
             <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Name</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-person"></i>
+                    <span class="input-label ml35">Name</span>
                     <input type="text" placeholder="Dr. John" required ng-model="doctor.name">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Address</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-card"></i>
+                    <span class="input-label ml35">Address</span>
                     <input type="text" placeholder="Aundh" required ng-model="doctor.address">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Phone</span>
+                <label class="item item-input item-icon-left">
+                    <i class="icon ion-ios7-telephone"></i>
+                    <span class="input-label ml35">Phone</span>
                     <input type="tel" placeholder="9876543210" required ng-model="doctor.phone">
                 </label>
             </div>
