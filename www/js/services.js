@@ -72,6 +72,14 @@ angular.module('doctorApp.services', [])
             sync.$add(txn);
         };
 
+        dataFactory.editPat = function (doctorId, patientId, patient) {
+            var url = baseUrl + doctorId + '/patients/' + patientId;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            data = patient;
+            data.$save();
+        };
+
         return dataFactory;
 
     });
