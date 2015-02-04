@@ -89,7 +89,10 @@ angular.module('doctorApp.controllers', [])
         $scope.addTxn = function () {
             var txn = {
                 payment: $scope.txn.payment,
-                date: $scope.txn.date
+                date: $scope.txn.date,
+                patient: 0,
+                material: 0,
+                visdoc: 0
             };
             if ($scope.txn.patient !== undefined) {
                 txn.patient = $scope.txn.patient;

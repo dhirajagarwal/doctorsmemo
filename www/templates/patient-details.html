@@ -1,6 +1,7 @@
 <ion-header-bar class="bar bar-positive item-input-inset">
     <a href="#/doctor-patients/{{doctorIndex}}" class="button button-icon ion-ios7-arrow-back">
     </a>
+
     <h1 class="title ml70">{{patientDetails.name}}</h1>
 </ion-header-bar>
 <ion-content>
@@ -41,34 +42,47 @@
                         {{patientDetails.startDate}}
                     </div>
                 </div>
-                <!--<div class="col-50">
-                    <div class="item item-icon-left">
-                        <i class="icon ion-calendar"></i>
-                        {{patientDetails.endDate}}
-                    </div>
-                </div>-->
             </div>
         </div>
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
             <div class="list card">
                 <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;">
+
                     <div class="row">
-                        <div class="col-20">
-                            <div class="mt10 item item-icon-left">
+                        <div class="col-10">
+                            <div class="item item-icon-left" style="margin-top: 40px">
                                 <i class="icon"><strong ng-bind="data.payment === false ? 'P' : 'R'"></strong></i>
                             </div>
                         </div>
-                        <div style="width: 45%">
-                            <div class="item item-icon-left">
-                                <i class="icon ion-calendar"></i>
-                                {{data.date}}
+                        <div class="col-90">
+                            <div class="row">
+                                <div style="width:53%;">
+                                    <div class="item item-icon-left small-font">
+                                        <i class="icon ion-calendar"></i>
+                                        {{data.date}}
+                                    </div>
+                                </div>
+                                <div class="col-40">
+                                    <div class="item item-icon-left small-font">
+                                        <i class="icon ion-man"> </i>
+                                         Rs. {{data.patient}}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-40">
-                            <div class="item item-icon-left">
-                                <i class="icon ion-cash"></i>
-                                {{data.amount}}
+                            <div class="row">
+                                <div style="width:53%;">
+                                    <div class="item item-icon-left small-font">
+                                        <i class="icon ion-flask"></i>
+                                        Rs. {{data.material}}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="item item-icon-left small-font">
+                                        <i class="icon ion-android-contacts"></i>
+                                        Rs. {{data.visdoc}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +105,8 @@
             <i class="icon ion-ios7-compose positive"></i>
             Edit
         </a>
-        <a class="tab-item" href="#/doctor-patients/{{doctorIndex}}" ng-click="patientfunc.removePat(patientInd,doctorIndex);">
+        <a class="tab-item" href="#/doctor-patients/{{doctorIndex}}"
+           ng-click="patientfunc.removePat(patientInd,doctorIndex);">
             <i class="icon ion-ios7-trash assertive"></i>
             Delete
         </a>

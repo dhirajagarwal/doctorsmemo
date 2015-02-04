@@ -13,9 +13,23 @@
 .ml70{
     margin-left: 70px !important;
 }
+.ml35{
+    margin-left:35px;
+}
 .pane{
     position: initial !important;
 }
 .title-center{
     text-align: center !important;
+}
+.col-10 {
+    border: solid #cccccc;
+}
+
+.col-90{
+    border: solid #cccccc;
+}
+
+.small-font{
+    font-size: small;
 }
