@@ -47,8 +47,7 @@
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
             <div class="list card">
-                <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;">
-
+                <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;" href="#/txnedit/{{patientInd}}/{{doctorIndex}}/{{key}}">
                     <div class="row">
                         <div class="col-10">
                             <div class="item item-icon-left" style="margin-top: 40px">

@@ -86,7 +86,15 @@ angular.module('doctorApp.controllers', [])
         $scope.patientInd = $stateParams.patientIndex;
         $scope.txn = {};
         $scope.txn.payment = false;
-        $scope.addTxn = function () {
+
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Add Transaction';
+        $scope.txtFields.buttonTxt = 'Add Transaction';
+        $scope.txtFields.deleteEnabled = false;
+
+        $scope.txnFuncs = {};
+
+        $scope.txnFuncs.buttonAction = function () {
             var txn = {
                 payment: $scope.txn.payment,
                 date: $scope.txn.date,
@@ -106,6 +114,41 @@ angular.module('doctorApp.controllers', [])
             Data.addTxn(txn, $stateParams.doctorInd, $stateParams.patientIndex);
             $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
+    })
+
+    .controller('EditTxnCtrl', function ($scope, Data, $stateParams, $state) {
+        $scope.doctorIndex = $stateParams.doctorInd;
+        $scope.patientInd = $stateParams.patientIndex;
+        $scope.txn = Data.getTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd);
+
+        $scope.txtFields = {};
+        $scope.txtFields.header = 'Edit Transaction';
+        $scope.txtFields.buttonTxt = 'Submit';
+        $scope.txtFields.deleteEnabled = true;
+
+        $scope.txnFuncs = {};
+        $scope.txnFuncs.buttonAction = function () {
+
+            $scope.txnObj = $scope.txn;
+
+            if ($scope.txn.patient === "") {
+                $scope.txnObj.patient = 0;
+            }
+            if ($scope.txn.material === "") {
+                $scope.txnObj.material = 0;
+            }
+            if ($scope.txn.visdoc === "") {
+                $scope.txnObj.visdoc = 0;
+            }
+
+            Data.editTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd, $scope.txnObj);
+            $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
+        }
+
+        $scope.txnFuncs.removeTxn = function () {
+            Data.removeTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd);
+        }
+
     })
 
     .controller('AddPatientCtrl', function ($scope, Data, $state, $stateParams) {

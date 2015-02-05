@@ -1,11 +1,11 @@
 <ion-header-bar class="bar bar-positive">
     <a href="#/patientDetails/{{patientInd}}/{{doctorIndex}}" class="button button-icon ion-ios7-arrow-back">
     </a>
-    <h1 class="title ml70">Add Transaction</h1>
+    <h1 class="title ml70">{{txtFields.header}}</h1>
 </ion-header-bar>
 <ion-content class="mt20">
     <ion-view view-title="AddDoctor">
-        <form name="form" ng-submit="addTxn()">
+        <form name="form" ng-submit="txnFuncs.buttonAction()">
             <div class="list">
                     <ion-toggle ng-model="txn.payment" toggle-class="toggle-positive">Txn Type (Payment / Receipt)</ion-toggle>
                 <label class="item item-input item-icon-left">
@@ -30,7 +30,7 @@
                 </label>
             </div>
             <div class="padding">
-                <button class="button button-block button-positive" type="submit">Add Transaction</button>
+                <button class="button button-block button-positive" type="submit">{{txtFields.buttonTxt}}</button>
             </div>
         </form>
     </ion-view>
@@ -44,6 +44,11 @@
         <a class="tab-item" href="#/patientDetails/{{patientInd}}/{{doctorIndex}}">
             <i class="icon ion-ios7-arrow-back positive"></i>
             Back
+        </a>
+        <a class="tab-item" ng-show="txtFields.deleteEnabled" href="#/patientDetails/{{patientInd}}/{{doctorIndex}}"
+           ng-click="txnFuncs.removeTxn()">
+            <i class="icon ion-ios7-trash assertive"></i>
+            Delete
         </a>
     </div>
 </ion-footer-bar>

@@ -78,6 +78,28 @@ angular.module('doctorApp.services', [])
             var data = $firebase(ref).$asObject();
             data = patient;
             data.$save();
+        }
+
+        dataFactory.getTxn = function (doctorId, patientId, txnId) {
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            return data;
+        };
+
+        dataFactory.editTxn = function (doctorId, patientId, txnId, txn) {
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            data = txn;
+            data.$save();
+        };
+
+        dataFactory.removeTxn = function (doctorId, patientId, txnId) {
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var ref = new Firebase(url);
+            var data = $firebase(ref).$asObject();
+            data.$remove();
         };
 
         return dataFactory;
