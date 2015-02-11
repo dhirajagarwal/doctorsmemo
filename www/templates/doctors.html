@@ -13,7 +13,7 @@
             ng-if="!search.searchIcon"></button>
 </ion-header-bar>
 <ion-content class="mt20">
-    <div class="row" ng-show="doc.tog">
+    <div class="row" ng-if="doc.tog">
         <div class="col-offset-20">
         </div>
         <div class="col-offset-20"></div>
@@ -25,8 +25,8 @@
         <a ng-repeat="doctor in allDocs | filter:search.searchText" ng-class="{'small-font' : doc.tog , 'item-icon-left' : !doc.tog}"
            href="#/doctor-patients/{{doctor.$id}}"
            class="item">
-            <i class="icon ion-person" ng-hide="doc.tog"></i>{{doctor.name}}
-            <div class="row small-font" ng-show="doc.tog">
+            <i class="icon ion-person" ng-if="!doc.tog"></i>{{doctor.name}}
+            <div class="row" ng-if="doc.tog">
                 <div class="col-offset-33"></div>
                 <div class="col-25 text-center">{{doctor.patient}}</div>
                 <div class="col-25 text-center">{{doctor.material}}</div>

@@ -42,8 +42,8 @@
                 <a ng-repeat="(key, data) in doctorDetails.patients | filter:search.searchText"
                    ng-class="{'small-font' : pat.tog , 'item-icon-left' : !pat.tog}"
                    ui-sref="patient-details({ patientIndex: key, doctorInd: doctorInde })" class="item">
-                    <i class="icon ion-person" ng-hide="pat.tog"></i>{{data.name}}
-                    <div class="row small-font" ng-show="pat.tog">
+                    <i class="icon ion-person" ng-if="!pat.tog"></i>{{data.name}}
+                    <div class="row" ng-if="pat.tog">
                         <div class="col-offset-34">
                         </div>
                         <div class="col-25 text-center">{{data.patient}}</div>
