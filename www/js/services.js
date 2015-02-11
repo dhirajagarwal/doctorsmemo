@@ -81,14 +81,14 @@ angular.module('doctorApp.services', [])
         }
 
         dataFactory.getTxn = function (doctorId, patientId, txnId) {
-            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
             return data;
         };
 
         dataFactory.editTxn = function (doctorId, patientId, txnId, txn) {
-            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
             data = txn;
@@ -96,10 +96,53 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.removeTxn = function (doctorId, patientId, txnId) {
-            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' +txnId;
+            var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
             data.$remove();
+        };
+
+        dataFactory.updateAllData = function (doctorIndex, patientIndex) {
+            var patUrl = baseUrl + doctorIndex + '/patients/' + patientIndex;
+            var patRef = new Firebase(patUrl);
+            var pat = $firebase(patRef).$asObject();
+
+            pat.$loaded().then(function (data) {
+                var rMaterial = 0, rPatient = 0, rVisdoc = 0, pMaterial = 0, pPatient = 0, pVisdoc = 0;
+                for (var txn in data.transactions) {
+                    if (data.transactions[txn].payment) {
+                        rMaterial += Number(data.transactions[txn].material);
+                        rPatient += Number(data.transactions[txn].patient);
+                        rVisdoc += Number(data.transactions[txn].visdoc);
+                    }
+                    else {
+                        pMaterial += Number(data.transactions[txn].material);
+                        pPatient += Number(data.transactions[txn].patient);
+                        pVisdoc += Number(data.transactions[txn].visdoc);
+                    }
+                }
+                pat.material = pMaterial - rMaterial;
+                pat.patient = pPatient - rPatient;
+                pat.visdoc = pVisdoc - rVisdoc;
+                pat.$save();
+            });
+
+            var docUrl = baseUrl + doctorIndex;
+            var docRef = new Firebase(docUrl);
+            var doc = $firebase(docRef).$asObject();
+
+            doc.$loaded().then(function (data) {
+                var material = 0, patient = 0, visdoc = 0;
+                for (var pat in data.patients) {
+                    material += Number(data.patients[pat].material);
+                    patient += Number(data.patients[pat].patient);
+                    visdoc += Number(data.patients[pat].visdoc);
+                }
+                doc.material = material;
+                doc.patient = patient;
+                doc.visdoc = visdoc;
+                doc.$save();
+            });
         };
 
         return dataFactory;

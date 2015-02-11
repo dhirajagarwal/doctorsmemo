@@ -11,6 +11,13 @@ angular.module('doctorApp.controllers', [])
         $scope.search.searchIcon = false;
         $scope.search.searchText = "";
 
+        $scope.doc = {};
+        $scope.doc.tog = false;
+
+        $scope.doc.expand = function () {
+            $scope.doc.tog = !$scope.doc.tog;
+        }
+
         $scope.searchClicked = function () {
             $scope.search.searchText = "";
             $scope.search.searchIcon = !$scope.search.searchIcon;
@@ -20,6 +27,13 @@ angular.module('doctorApp.controllers', [])
     .controller('DoctorDetailsCtrl', function ($scope, $stateParams, Data) {
         $scope.doctorInde = $stateParams.doctorIndex;
         $scope.doctorDetails = Data.getDoc($stateParams.doctorIndex);
+
+        $scope.pat = {};
+        $scope.pat.tog = false;
+
+        $scope.pat.expand = function () {
+            $scope.pat.tog = !$scope.pat.tog;
+        }
 
         $scope.search = {};
         $scope.search.searchIcon = false;
@@ -59,7 +73,10 @@ angular.module('doctorApp.controllers', [])
             var doc = {
                 name: $scope.doctor.name,
                 address: $scope.doctor.address,
-                phone: $scope.doctor.phone
+                phone: $scope.doctor.phone,
+                patient: 0,
+                material: 0,
+                visdoc: 0
             };
             Data.addDoc(doc);
             $state.go('doctors');
@@ -112,6 +129,7 @@ angular.module('doctorApp.controllers', [])
                 txn.visdoc = $scope.txn.visdoc;
             }
             Data.addTxn(txn, $stateParams.doctorInd, $stateParams.patientIndex);
+            Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
             $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
     })
@@ -127,6 +145,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txtFields.deleteEnabled = true;
 
         $scope.txnFuncs = {};
+
         $scope.txnFuncs.buttonAction = function () {
 
             $scope.txnObj = $scope.txn;
@@ -142,6 +161,7 @@ angular.module('doctorApp.controllers', [])
             }
 
             Data.editTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd, $scope.txnObj);
+            Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
             $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
 
@@ -168,7 +188,10 @@ angular.module('doctorApp.controllers', [])
                 startDate: $scope.patient.startDate,
                 fees: $scope.patient.fees,
                 share: $scope.patient.share,
-                transactions: []
+                transactions: [],
+                patient: 0,
+                material: 0,
+                visdoc: 0
             };
             Data.addPat(patient, $stateParams.doctorInd);
             $state.go('doctor-details', {doctorIndex: $stateParams.doctorInd});

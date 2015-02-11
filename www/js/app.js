@@ -19,7 +19,6 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-            ionic.Platform.isFullScreen = false;
         });
     })
 
