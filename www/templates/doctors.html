@@ -12,7 +12,7 @@
     <button class="button button-icon ion-ios7-search-strong" ng-click="searchClicked()"
             ng-if="!search.searchIcon"></button>
 </ion-header-bar>
-<ion-content class="mt20">
+<ion-content class="mt20 has-header has-footer">
     <div class="row" ng-if="doc.tog">
         <div class="col-offset-20">
         </div>
@@ -22,7 +22,8 @@
         <div class="col-20 text-center"><i class="icon ion-android-contacts fs30"></i></div>
     </div>
     <div class="list card">
-        <a ng-repeat="doctor in allDocs | filter:search.searchText" ng-class="{'small-font' : doc.tog , 'item-icon-left' : !doc.tog}"
+        <a ng-repeat="doctor in allDocs | filter:search.searchText"
+           ng-class="{'small-font' : doc.tog , 'item-icon-left' : !doc.tog}"
            href="#/doctor-patients/{{doctor.$id}}"
            class="item">
             <i class="icon ion-person" ng-if="!doc.tog"></i>{{doctor.name}}
@@ -41,7 +42,7 @@
             <i class="icon ion-ios7-plus positive"></i>
             Add Doctor
         </a>
-        <a class="tab-item" ng-click="doc.expand();" ng-if="!search.searchIcon" >
+        <a class="tab-item" ng-click="doc.expand();" ng-if="!search.searchIcon">
             <i class="icon" ng-class="{'ion-plus-round dark' : !doc.tog , 'ion-minus-round dark' : doc.tog}"></i>
             <span ng-bind="doc.tog ? 'Collapse All' : 'Expand All'"></span>
         </a>

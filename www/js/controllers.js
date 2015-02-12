@@ -5,7 +5,14 @@
 
 angular.module('doctorApp.controllers', [])
 
-    .controller('DoctorCtrl', function ($scope, Data) {
+    .controller('DoctorCtrl', function ($scope, Data, $state) {
+
+        var value = window.localStorage.getItem("loggedIn");
+
+        if (value === '' || value === undefined || value === null) {
+            $state.go('login');
+        }
+
         $scope.allDocs = Data.allData();
         $scope.search = {};
         $scope.search.searchIcon = false;
@@ -196,6 +203,32 @@ angular.module('doctorApp.controllers', [])
             Data.addPat(patient, $stateParams.doctorInd);
             $state.go('doctor-details', {doctorIndex: $stateParams.doctorInd});
         }
+    })
+
+    .controller('LoginCtrl', function ($scope, $firebaseAuth, $state) {
+        var ref = new Firebase("https://doctormemo.firebaseio.com");
+        $scope.authObj = $firebaseAuth(ref);
+        $scope.loginError = false;
+        $scope.email = {};
+        $scope.password = {};
+
+        $scope.login = function (emaildata, passworddata) {
+            $scope.authObj.$authWithPassword({
+                email: emaildata,
+                password: passworddata
+            }).then(function () {
+                $scope.loginError = true;
+                window.localStorage.setItem("loggedIn", "true");
+                window.localStorage.setItem("email", emaildata.replace('.com', ''));
+                $state.go('doctors');
+            }).catch(function (error) {
+                $scope.loginError = true;
+                $scope.email.data = '';
+                $scope.password.data = '';
+                console.error("Authentication failed:", error);
+            });
+        }
+
     })
 
     .controller('EditPatientCtrl', function ($scope, Data, $state, $stateParams) {

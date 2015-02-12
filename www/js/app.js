@@ -8,7 +8,7 @@
 
 angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controllers', 'firebase'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $state, $ionicHistory ) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,6 +20,16 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 StatusBar.styleDefault();
             }
         });
+
+        $ionicPlatform.registerBackButtonAction(function () {
+            if($state.is('login') || $state.is('doctors')){
+                ionic.Platform.exitApp();
+                // or do nothing
+            }
+            else {
+                $ionicHistory.goBack();
+            }
+        }, 100);
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -31,11 +41,19 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
         $stateProvider
 
             // setup an abstract state for the tabs directive
+
             .state('doctors', {
                 url: "/",
                 cache: false,
                 templateUrl: "templates/doctors.html",
                 controller: 'DoctorCtrl'
+            })
+
+            .state('login', {
+                url: "/login",
+                cache: false,
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
             })
 
             .state('doctor-details', {

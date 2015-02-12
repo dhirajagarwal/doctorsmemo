@@ -4,26 +4,23 @@
 angular.module('doctorApp.services', [])
 
     .factory('Data', function ($firebase) {
-        // Might use a resource here that returns a JSON array
 
-        // Some fake testing data
         var dataFactory = {};
-        var baseUrl = 'https://doctormemo.firebaseio.com/';
 
         dataFactory.allData = function () {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var ref = new Firebase(baseUrl);
-            var data = $firebase(ref).$asArray();
-            return data;
+            return $firebase(ref).$asArray();
         };
 
         dataFactory.getDoc = function (index) {
-            var url = baseUrl + index;
-            var ref = new Firebase(url);
-            var data = $firebase(ref).$asObject();
-            return data;
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
+            var ref = new Firebase(baseUrl + index);
+            return $firebase(ref).$asObject();
         };
 
         dataFactory.editDoc = function (index, doc) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + index;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -32,12 +29,14 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.removeDoc = function (index) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var ref = new Firebase(baseUrl + index);
             var data = $firebase(ref).$asObject();
             data.$remove();
         };
 
         dataFactory.getPatient = function (patient, doctorIndex) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorIndex + '/patients/' + patient;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -45,6 +44,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.removePatient = function (patient, doctorIndex) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorIndex + '/patients/' + patient;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -52,12 +52,14 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.addDoc = function (doctor) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var ref = new Firebase(baseUrl);
             var data = $firebase(ref).$asArray();
             data.$add(doctor);
         };
 
         dataFactory.addPat = function (patient, doctorIndex) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var patientUrl = baseUrl + doctorIndex + '/patients';
             var patientsRef = new Firebase(patientUrl);
             var sync = $firebase(patientsRef).$asArray();
@@ -66,6 +68,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.addTxn = function (txn, doctorIndex, patientIndex) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var txnUrl = baseUrl + doctorIndex + '/patients/' + patientIndex + '/transactions/';
             var patientsRef = new Firebase(txnUrl);
             var sync = $firebase(patientsRef).$asArray();
@@ -73,6 +76,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.editPat = function (doctorId, patientId, patient) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorId + '/patients/' + patientId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -81,6 +85,7 @@ angular.module('doctorApp.services', [])
         }
 
         dataFactory.getTxn = function (doctorId, patientId, txnId) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -88,6 +93,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.editTxn = function (doctorId, patientId, txnId, txn) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -96,6 +102,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.removeTxn = function (doctorId, patientId, txnId) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var url = baseUrl + doctorId + '/patients/' + patientId + '/transactions/' + txnId;
             var ref = new Firebase(url);
             var data = $firebase(ref).$asObject();
@@ -103,6 +110,7 @@ angular.module('doctorApp.services', [])
         };
 
         dataFactory.updateAllData = function (doctorIndex, patientIndex) {
+            var baseUrl = 'https://doctormemo.firebaseio.com/' + window.localStorage.getItem("email") + '/';
             var patUrl = baseUrl + doctorIndex + '/patients/' + patientIndex;
             var patRef = new Firebase(patUrl);
             var pat = $firebase(patRef).$asObject();
@@ -146,5 +154,4 @@ angular.module('doctorApp.services', [])
         };
 
         return dataFactory;
-
     });

@@ -1,0 +1,20 @@
+<div class="bar bar-subheader bar-assertive" ng-show="loginError">
+    <h2 class="title">Login Error</h2>
+</div>
+<ion-content class="has-subheader">
+        <form ng-submit="login(email.data,password.data)">
+            <div class="list mt20">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="asd@asd.com" required ng-model="email.data">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="****" required ng-model="password.data">
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-positive" type="submit">Login</button>
+            </div>
+        </form>
+</ion-content>
