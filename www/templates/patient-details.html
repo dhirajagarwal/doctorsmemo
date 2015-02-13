@@ -1,11 +1,9 @@
-<ion-header-bar class="bar bar-positive item-input-inset">
-    <a href="#/doctor-patients/{{doctorIndex}}" class="button button-icon ion-ios7-arrow-back">
-    </a>
-
-    <h1 class="title ml70">{{patientDetails.name}}</h1>
-</ion-header-bar>
-<ion-content>
-    <ion-view view-title="DoctorDetails">
+<ion-view>
+    <ion-nav-title>{{patientDetails.name}}</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content>
         <div class="list card">
             <div class="row">
                 <div class="col-50">
@@ -47,7 +45,8 @@
         <ion-list class="mt20">
             <ion-item class="item-divider mb20 text-center">Transactions</ion-item>
             <div class="list card">
-                <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;" href="#/txnedit/{{patientInd}}/{{doctorIndex}}/{{key}}">
+                <a ng-repeat="(key, data)  in patientDetails.transactions" style="text-decoration:none;"
+                   href="#/app/txnedit/{{patientInd}}/{{doctorIndex}}/{{key}}">
                     <div class="row">
                         <div class="col-10">
                             <div class="item item-icon-left" style="margin-top: 40px">
@@ -65,7 +64,7 @@
                                 <div class="col-40">
                                     <div class="item item-icon-left small-font">
                                         <i class="icon ion-man"> </i>
-                                         Rs. {{data.patient}}
+                                        Rs. {{data.patient}}
                                     </div>
                                 </div>
                             </div>
@@ -88,26 +87,26 @@
                 </a>
             </div>
         </ion-list>
-    </ion-view>
-</ion-content>
-<ion-footer-bar>
-    <div class="tabs tabs-icon-top">
-        <a class="tab-item" href="#/">
-            <i class="icon ion-ios7-home positive"></i>
-            Doctors
-        </a>
-        <a class="tab-item" href="#/txnAdd/{{patientInd}}/{{doctorIndex}}">
-            <i class="icon ion-ios7-plus positive"></i>
-            Add Transaction
-        </a>
-        <a class="tab-item" href="#/editPatient/{{patientInd}}/{{doctorIndex}}">
-            <i class="icon ion-ios7-compose positive"></i>
-            Edit
-        </a>
-        <a class="tab-item" href="#/doctor-patients/{{doctorIndex}}"
-           ng-click="patientfunc.removePat(patientInd,doctorIndex);">
-            <i class="icon ion-ios7-trash assertive"></i>
-            Delete
-        </a>
-    </div>
-</ion-footer-bar>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="tabs tabs-icon-top">
+            <a class="tab-item" href="#/app/doctors">
+                <i class="icon ion-ios7-home positive"></i>
+                Doctors
+            </a>
+            <a class="tab-item" href="#/app/txnAdd/{{patientInd}}/{{doctorIndex}}">
+                <i class="icon ion-ios7-plus positive"></i>
+                Add Transaction
+            </a>
+            <a class="tab-item" href="#/app/editPatient/{{patientInd}}/{{doctorIndex}}">
+                <i class="icon ion-ios7-compose positive"></i>
+                Edit
+            </a>
+            <a class="tab-item" href="#/app/doctor-patients/{{doctorIndex}}"
+               ng-click="patientfunc.removePat(patientInd,doctorIndex);">
+                <i class="icon ion-ios7-trash assertive"></i>
+                Delete
+            </a>
+        </div>
+    </ion-footer-bar>
+</ion-view>

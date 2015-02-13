@@ -5,6 +5,14 @@
 
 angular.module('doctorApp.controllers', [])
 
+    .controller('AppCtrl', function($scope, $state) {
+        $scope.logout = function(){
+            window.localStorage.removeItem("loggedIn");
+            window.localStorage.removeItem("email");
+            $state.go('login');
+        }
+    })
+
     .controller('DoctorCtrl', function ($scope, Data, $state) {
 
         var value = window.localStorage.getItem("loggedIn");
@@ -86,7 +94,7 @@ angular.module('doctorApp.controllers', [])
                 visdoc: 0
             };
             Data.addDoc(doc);
-            $state.go('doctors');
+            $state.go('app.doctors');
         }
     })
 
@@ -101,7 +109,7 @@ angular.module('doctorApp.controllers', [])
         $scope.docFuncs = {};
         $scope.docFuncs.buttonAction = function () {
             Data.editDoc($stateParams.doctorIndex, $scope.doctor);
-            $state.go('doctors');
+            $state.go('app.doctors');
         }
     })
 
@@ -137,7 +145,7 @@ angular.module('doctorApp.controllers', [])
             }
             Data.addTxn(txn, $stateParams.doctorInd, $stateParams.patientIndex);
             Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
-            $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
+            $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
     })
 
@@ -169,7 +177,7 @@ angular.module('doctorApp.controllers', [])
 
             Data.editTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd, $scope.txnObj);
             Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
-            $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
+            $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
 
         $scope.txnFuncs.removeTxn = function () {
@@ -201,7 +209,7 @@ angular.module('doctorApp.controllers', [])
                 visdoc: 0
             };
             Data.addPat(patient, $stateParams.doctorInd);
-            $state.go('doctor-details', {doctorIndex: $stateParams.doctorInd});
+            $state.go('app.doctor-details', {doctorIndex: $stateParams.doctorInd});
         }
     })
 
@@ -220,7 +228,7 @@ angular.module('doctorApp.controllers', [])
                 $scope.loginError = true;
                 window.localStorage.setItem("loggedIn", "true");
                 window.localStorage.setItem("email", emaildata.replace('.com', ''));
-                $state.go('doctors');
+                $state.go('app.doctors');
             }).catch(function (error) {
                 $scope.loginError = true;
                 $scope.email.data = '';
@@ -243,7 +251,7 @@ angular.module('doctorApp.controllers', [])
         $scope.patFuncs = {};
         $scope.patFuncs.buttonAction = function () {
             Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
-            $state.go('patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
+            $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
 
     });

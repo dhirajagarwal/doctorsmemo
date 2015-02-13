@@ -1,77 +1,63 @@
-<ion-header-bar class="bar bar-positive item-input-inset">
-    <a href="#/" ng-if="!search.searchIcon" class="button button-icon ion-ios7-arrow-back">
-    </a>
-
-    <h1 class="title" ng-if="!search.searchIcon">{{doctorDetails.name}}</h1>
-
-    <div class="bar bar-header item-input-inset bar-positive" ng-if="search.searchIcon">
-        <label class="item-input-wrapper">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
-            <input type="search" class="positive" ng-model="search.searchText" placeholder="Search">
-        </label>
-        <button class="button button-clear" ng-click="searchClicked()">
-            Cancel
-        </button>
-    </div>
-    <button class="button button-icon icon  ion-ios7-search-strong" ng-click="searchClicked()"
-            ng-if="!search.searchIcon"></button>
-</ion-header-bar>
-<ion-content>
-    <ion-view view-title="DoctorDetails">
-        <div class="list card">
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-card"></i>
-                {{doctorDetails.address}}
-            </a>
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-ios7-telephone"></i>
-                {{doctorDetails.phone}}
-            </a>
-        </div>
-        <ion-list class="mt20">
-            <ion-item class="item-divider mb20 text-center">Patients</ion-item>
-            <div class="row" ng-show="pat.tog">
-                <div class="col-offset-20">
-                </div>
-                <div class="col-offset-20"></div>
-                <div class="col-20 text-center"><i class="icon ion-man fs30"></i></div>
-                <div class="col-20 text-center"><i class="icon ion-flask fs30"></i></div>
-                <div class="col-20 text-center"><i class="icon ion-android-contacts fs30"></i></div>
-            </div>
+<ion-view>
+    <ion-nav-title>{{doctorDetails.name}}</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content>
             <div class="list card">
-                <a ng-repeat="(key, data) in doctorDetails.patients | filter:search.searchText"
-                   ng-class="{'small-font' : pat.tog , 'item-icon-left' : !pat.tog}"
-                   ui-sref="patient-details({ patientIndex: key, doctorInd: doctorInde })" class="item">
-                    <i class="icon ion-person" ng-if="!pat.tog"></i>{{data.name}}
-                    <div class="row" ng-if="pat.tog">
-                        <div class="col-offset-34">
-                        </div>
-                        <div class="col-25 text-center">{{data.patient}}</div>
-                        <div class="col-25 text-center">{{data.material}}</div>
-                        <div class="col-25 text-center">{{data.visdoc}}</div>
-                    </div>
+                <a href="#" class="item item-icon-left">
+                    <i class="icon ion-card"></i>
+                    {{doctorDetails.address}}
+                </a>
+                <a href="#" class="item item-icon-left">
+                    <i class="icon ion-ios7-telephone"></i>
+                    {{doctorDetails.phone}}
                 </a>
             </div>
-        </ion-list>
-    </ion-view>
-</ion-content>
-<ion-footer-bar>
-    <div class="tabs tabs-icon-top">
-        <a class="tab-item" ui-sref="add-patient({ doctorInd: doctorInde })">
-            <i class="icon ion-ios7-plus positive"></i>
-            Add Patient
-        </a>
-        <a class="tab-item" href="#/editDoctor/{{doctorInde}}">
-            <i class="icon ion-ios7-compose positive"></i>
-            Edit
-        </a>
-        <a class="tab-item" ng-click="doctorfunc.removeDoc(doctorInde);" href="#/">
-            <i class="icon ion-ios7-trash assertive"></i>
-            Delete
-        </a>
-        <a class="tab-item" ng-click="pat.expand();" ng-if="!search.searchIcon">
-            <i class="icon" ng-class="{'ion-plus-round dark' : !pat.tog , 'ion-minus-round dark' : pat.tog}"></i>
-            <span ng-bind="pat.tog ? 'Collapse All' : 'Expand All'"></span>
-        </a>
-    </div>
-</ion-footer-bar>
+            <ion-list class="mt20">
+                <ion-item class="item-divider mb20 text-center">Patients</ion-item>
+                <div class="row" ng-show="pat.tog">
+                    <div class="col-offset-20">
+                    </div>
+                    <div class="col-offset-20"></div>
+                    <div class="col-20 text-center"><i class="icon ion-man fs30"></i></div>
+                    <div class="col-20 text-center"><i class="icon ion-flask fs30"></i></div>
+                    <div class="col-20 text-center"><i class="icon ion-android-contacts fs30"></i></div>
+                </div>
+                <div class="list card">
+                    <a ng-repeat="(key, data) in doctorDetails.patients | filter:search.searchText"
+                       ng-class="{'small-font' : pat.tog , 'item-icon-left' : !pat.tog}"
+                       ui-sref="app.patient-details({ patientIndex: key, doctorInd: doctorInde })" class="item">
+                        <i class="icon ion-person" ng-if="!pat.tog"></i>{{data.name}}
+                        <div class="row" ng-if="pat.tog">
+                            <div class="col-offset-34">
+                            </div>
+                            <div class="col-25 text-center">{{data.patient}}</div>
+                            <div class="col-25 text-center">{{data.material}}</div>
+                            <div class="col-25 text-center">{{data.visdoc}}</div>
+                        </div>
+                    </a>
+                </div>
+            </ion-list>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="tabs tabs-icon-top">
+            <a class="tab-item" ui-sref="app.add-patient({ doctorInd: doctorInde })">
+                <i class="icon ion-ios7-plus positive"></i>
+                Add Patient
+            </a>
+            <a class="tab-item" href="#/app/editDoctor/{{doctorInde}}">
+                <i class="icon ion-ios7-compose positive"></i>
+                Edit
+            </a>
+            <a class="tab-item" ng-click="doctorfunc.removeDoc(doctorInde);" href="#/">
+                <i class="icon ion-ios7-trash assertive"></i>
+                Delete
+            </a>
+            <a class="tab-item" ng-click="pat.expand();">
+                <i class="icon" ng-class="{'ion-plus-round dark' : !pat.tog , 'ion-minus-round dark' : pat.tog}"></i>
+                <span ng-bind="pat.tog ? 'Collapse All' : 'Expand All'"></span>
+            </a>
+        </div>
+    </ion-footer-bar>
+</ion-view>

@@ -1,10 +1,9 @@
-<ion-header-bar class="bar bar-positive">
-    <a href="#/doctor-patients/{{doctorInde}}" class="button button-icon ion-ios7-arrow-back">
-    </a>
-    <h1 class="title ml70">{{txtFields.header}}</h1>
-</ion-header-bar>
-<ion-content class="mt20">
-    <ion-view view-title="AddPatient">
+<ion-view>
+    <ion-nav-title>{{txtFields.header}}</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="mt20">
         <form ng-submit="patFuncs.buttonAction()">
             <div class="list">
                 <label class="item item-input item-icon-left">
@@ -42,17 +41,17 @@
                 <button class="button button-block button-positive" type="submit">{{txtFields.buttonTxt}}</button>
             </div>
         </form>
-    </ion-view>
-</ion-content>
-<ion-footer-bar>
-    <div class="tabs tabs-icon-top">
-        <a class="tab-item" href="#/">
-            <i class="icon ion-ios7-home positive"></i>
-            Doctors
-        </a>
-        <a class="tab-item" href="#/doctor-patients/{{doctorInde}}">
-            <i class="icon ion-ios7-home positive"></i>
-            Patients
-        </a>
-    </div>
-</ion-footer-bar>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="tabs tabs-icon-top">
+            <a class="tab-item" href="#/app/doctors">
+                <i class="icon ion-ios7-home positive"></i>
+                Doctors
+            </a>
+            <a class="tab-item" href="#/app/doctor-patients/{{doctorInde}}">
+                <i class="icon ion-ios7-home positive"></i>
+                Patients
+            </a>
+        </div>
+    </ion-footer-bar>
+</ion-view>
