@@ -22,7 +22,7 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
         });
 
         $ionicPlatform.registerBackButtonAction(function () {
-            if ($state.is('login') || $state.is('doctors')) {
+            if ($state.is('login') || $state.is('app.doctors')) {
                 ionic.Platform.exitApp();
                 // or do nothing
             }
