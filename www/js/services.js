@@ -129,9 +129,9 @@ angular.module('doctorApp.services', [])
                         pVisdoc += Number(data.transactions[txn].visdoc);
                     }
                 }
-                pat.material = pMaterial - rMaterial;
-                pat.patient = pPatient - rPatient;
-                pat.visdoc = pVisdoc - rVisdoc;
+                pat.material = rMaterial - pMaterial;
+                pat.patient = rPatient - pPatient;
+                pat.visdoc =  rVisdoc - pVisdoc;
                 pat.$save();
             });
 

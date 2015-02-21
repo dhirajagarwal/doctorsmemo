@@ -63,7 +63,6 @@ angular.module('doctorApp.controllers', [])
         $scope.doctorfunc.removeDoc = function (doctorInd) {
             Data.removeDoc(doctorInd);
         }
-
     })
 
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data) {
@@ -199,8 +198,8 @@ angular.module('doctorApp.controllers', [])
 
         $scope.txnFuncs.removeTxn = function () {
             Data.removeTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd);
+            Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
         }
-
     })
 
     .controller('AddPatientCtrl', function ($scope, Data, $state, $stateParams) {
@@ -255,7 +254,6 @@ angular.module('doctorApp.controllers', [])
                 console.error("Authentication failed:", error);
             });
         }
-
     })
 
     .controller('EditPatientCtrl', function ($scope, Data, $state, $stateParams) {
@@ -277,5 +275,4 @@ angular.module('doctorApp.controllers', [])
             Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
             $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
-
     });
