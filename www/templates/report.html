@@ -24,15 +24,15 @@
         <div class="list card">
             <label class="item item-input">
                 <span class="input-label">Clinics</span>
-                <span class="ml30">20</span>
+                <span class="ml30">{{report.clinics}}</span>
             </label>
             <label class="item item-input">
                 <span class="input-label">Patients</span>
-                <span class="ml30">12</span>
+                <span class="ml30">{{report.patients}}</span>
             </label>
             <label class="item item-input">
                 <span class="input-label">New Patients</span>
-                <span class="ml30">12</span>
+                <span class="ml30">{{report.newPatients}}</span>
             </label>
             <label class="item item-input">
                 <span class="input-label">Revenue</span>
@@ -45,9 +45,9 @@
             <label class="item item-input">
                 <span class="input-label"></span>
                 <div class="row">
-                    <div class="col-33 text-center">123568</div>
-                    <div class="col-33 text-center">234129</div>
-                    <div class="col-33 text-center">345124</div>
+                    <div class="col-33 text-center">{{report.patient}}</div>
+                    <div class="col-33 text-center">{{report.material}}</div>
+                    <div class="col-33 text-center">{{report.visdoc}}</div>
                 </div>
             </label>
         </div>

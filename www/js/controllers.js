@@ -63,6 +63,7 @@ angular.module('doctorApp.controllers', [])
         $scope.doctorfunc.removeDoc = function (doctorInd) {
             Data.removeDoc(doctorInd);
         }
+
     })
 
     .controller('PatientDetailsCtrl', function ($scope, $stateParams, Data) {
@@ -112,7 +113,14 @@ angular.module('doctorApp.controllers', [])
         }
     })
 
-    .controller('ReportCtrl', function ($scope) {
+    .controller('ReportCtrl', function ($scope, Data) {
+
+        var Docs = Data.allData();
+
+        Docs.$loaded().then(function (data){
+            console.log(data);
+        });
+
         $scope.report= {};
 
         var d = new Date();
@@ -120,6 +128,50 @@ angular.module('doctorApp.controllers', [])
 
         $scope.report.to = new Date();
         $scope.report.from = d;
+
+        $scope.report.submit = function(){
+            var newPatients = 0, clinics = 0, patients = 0;
+            var rPatient= 0,rMaterial= 0, rVisdoc= 0, pPatient= 0, pMaterial= 0,pVisdoc=0;
+            for (var doc in Docs){
+                var docPresent = false;
+                for(var patient in Docs[doc].patients){
+                    var patientPresent = false;
+                    if((new Date(Docs[doc].patients[patient].startDate) > $scope.report.from) && (new Date(Docs[doc].patients[patient].startDate) < $scope.report.to)){
+                        newPatients += 1;
+                        docPresent = true;
+                    }
+                    for(var txn in Docs[doc].patients[patient].transactions){
+                        if((new Date(Docs[doc].patients[patient].transactions[txn].date) > $scope.report.from) && (new Date(Docs[doc].patients[patient].transactions[txn].date) < $scope.report.to)){
+                            patientPresent = true;
+                            docPresent = true;
+                            if(Docs[doc].patients[patient].transactions[txn].payment){
+                                rPatient += Number(Docs[doc].patients[patient].transactions[txn].patient);
+                                rMaterial += Number(Docs[doc].patients[patient].transactions[txn].material);
+                                rVisdoc += Number(Docs[doc].patients[patient].transactions[txn].visdoc);
+                            }
+                            else{
+                                pPatient += Number(Docs[doc].patients[patient].transactions[txn].patient);
+                                pMaterial += Number(Docs[doc].patients[patient].transactions[txn].material);
+                                pVisdoc += Number(Docs[doc].patients[patient].transactions[txn].visdoc);
+                            }
+                        }
+                    }
+                    if(patientPresent){
+                        patients += 1;
+                    }
+                    if(docPresent){
+                        clinics += 1;
+                    }
+                }
+            }
+            $scope.report.patient = rPatient - pPatient;
+            $scope.report.material = rMaterial - pMaterial;
+            $scope.report.visdoc = rVisdoc - pVisdoc;
+            $scope.report.newPatients = newPatients;
+            $scope.report.clinics = clinics;
+            $scope.report.patients = patients;
+        }
+
     })
 
     .controller('AddTxnCtrl', function ($scope, Data, $stateParams, $state) {
@@ -200,6 +252,7 @@ angular.module('doctorApp.controllers', [])
             Data.removeTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd);
             Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
         }
+
     })
 
     .controller('AddPatientCtrl', function ($scope, Data, $state, $stateParams) {
@@ -254,6 +307,7 @@ angular.module('doctorApp.controllers', [])
                 console.error("Authentication failed:", error);
             });
         }
+
     })
 
     .controller('EditPatientCtrl', function ($scope, Data, $state, $stateParams) {
@@ -275,4 +329,5 @@ angular.module('doctorApp.controllers', [])
             Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
             $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
+
     });
