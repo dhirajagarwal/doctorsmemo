@@ -68,6 +68,17 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 }
             })
 
+            .state('app.report', {
+                url: "/report",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/report.html",
+                        controller: 'ReportCtrl'
+                    }
+                }
+            })
+
             .state('app.doctor-details', {
                 url: '/doctor-patients/:doctorIndex',
                 cache: false,

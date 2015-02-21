@@ -113,11 +113,22 @@ angular.module('doctorApp.controllers', [])
         }
     })
 
+    .controller('ReportCtrl', function ($scope) {
+        $scope.report= {};
+
+        var d = new Date();
+        d.setDate(1);
+
+        $scope.report.to = new Date();
+        $scope.report.from = d;
+    })
+
     .controller('AddTxnCtrl', function ($scope, Data, $stateParams, $state) {
         $scope.doctorIndex = $stateParams.doctorInd;
         $scope.patientInd = $stateParams.patientIndex;
         $scope.txn = {};
         $scope.txn.payment = false;
+        $scope.txn.date = new Date();
 
         $scope.txtFields = {};
         $scope.txtFields.header = 'Add Transaction';
@@ -129,7 +140,7 @@ angular.module('doctorApp.controllers', [])
         $scope.txnFuncs.buttonAction = function () {
             var txn = {
                 payment: $scope.txn.payment,
-                date: $scope.txn.date,
+                date: ($scope.txn.date).toLocaleDateString(),
                 patient: 0,
                 material: 0,
                 visdoc: 0
@@ -154,6 +165,10 @@ angular.module('doctorApp.controllers', [])
         $scope.patientInd = $stateParams.patientIndex;
         $scope.txn = Data.getTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd);
 
+        $scope.txn.$loaded().then(function (data){
+            $scope.txn.date = new Date(data.date);
+        });
+
         $scope.txtFields = {};
         $scope.txtFields.header = 'Edit Transaction';
         $scope.txtFields.buttonTxt = 'Submit';
@@ -175,6 +190,8 @@ angular.module('doctorApp.controllers', [])
                 $scope.txnObj.visdoc = 0;
             }
 
+            $scope.txnObj.date = ($scope.txn.date).toLocaleDateString();
+
             Data.editTxn($stateParams.doctorInd, $stateParams.patientIndex, $stateParams.txnInd, $scope.txnObj);
             Data.updateAllData($stateParams.doctorInd, $stateParams.patientIndex);
             $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
@@ -190,6 +207,8 @@ angular.module('doctorApp.controllers', [])
         $scope.doctorInde = $stateParams.doctorInd;
         $scope.patient = {};
 
+        $scope.patient.startDate = new Date();
+
         $scope.txtFields = {};
         $scope.txtFields.header = 'Add Patient';
         $scope.txtFields.buttonTxt = 'Add Patient';
@@ -200,7 +219,7 @@ angular.module('doctorApp.controllers', [])
                 name: $scope.patient.name,
                 illness: $scope.patient.illness,
                 phone: $scope.patient.phone,
-                startDate: $scope.patient.startDate,
+                startDate: ($scope.patient.startDate).toLocaleDateString(),
                 fees: $scope.patient.fees,
                 share: $scope.patient.share,
                 transactions: [],
@@ -244,12 +263,17 @@ angular.module('doctorApp.controllers', [])
         $scope.patientInd = $stateParams.patientIndex;
         $scope.patient = Data.getPatient($stateParams.patientIndex, $stateParams.doctorInd);
 
+        $scope.patient.$loaded().then(function (data){
+            $scope.patient.startDate = new Date(data.startDate);
+        });
+
         $scope.txtFields = {};
         $scope.txtFields.header = 'Edit Patient';
         $scope.txtFields.buttonTxt = 'Submit';
 
         $scope.patFuncs = {};
         $scope.patFuncs.buttonAction = function () {
+            $scope.patient.startDate = ($scope.patient.startDate).toLocaleDateString();
             Data.editPat($stateParams.doctorInd, $stateParams.patientIndex, $scope.patient);
             $state.go('app.patient-details', {patientIndex: $stateParams.patientIndex, doctorInd: $stateParams.doctorInd});
         }
