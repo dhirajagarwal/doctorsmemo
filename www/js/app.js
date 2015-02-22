@@ -26,6 +26,9 @@ angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controlle
                 ionic.Platform.exitApp();
                 // or do nothing
             }
+            else if ($state.is('app.report')){
+                $state.go('app.doctors');
+            }
             else {
                 $ionicHistory.goBack();
             }

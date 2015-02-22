@@ -117,10 +117,6 @@ angular.module('doctorApp.controllers', [])
 
         var Docs = Data.allData();
 
-        Docs.$loaded().then(function (data){
-            console.log(data);
-        });
-
         $scope.report= {};
 
         var d = new Date();
@@ -159,9 +155,9 @@ angular.module('doctorApp.controllers', [])
                     if(patientPresent){
                         patients += 1;
                     }
-                    if(docPresent){
-                        clinics += 1;
-                    }
+                }
+                if(docPresent){
+                    clinics += 1;
                 }
             }
             $scope.report.patient = rPatient - pPatient;
