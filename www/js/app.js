@@ -8,169 +8,167 @@
 
 angular.module('doctorApp', ['ionic', 'doctorApp.services', 'doctorApp.controllers', 'firebase'])
 
-    .run(function ($ionicPlatform, $state, $ionicHistory) {
-        $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
-            }
-        });
+.run(function($ionicPlatform, $state, $ionicHistory) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
 
-        $ionicPlatform.registerBackButtonAction(function () {
-            if ($state.is('login') || $state.is('app.doctors')) {
-                ionic.Platform.exitApp();
-                // or do nothing
-            }
-            else if ($state.is('app.report')){
-                $state.go('app.doctors');
-            }
-            else {
-                $ionicHistory.goBack();
-            }
-        }, 100);
-    })
+  $ionicPlatform.registerBackButtonAction(function() {
+    if ($state.is('login') || $state.is('app.doctors')) {
+      ionic.Platform.exitApp();
+      // or do nothing
+    } else if ($state.is('app.report')) {
+      $state.go('app.doctors');
+    } else {
+      $ionicHistory.goBack();
+    }
+  }, 100);
+})
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
-        // Ionic uses AngularUI Router which uses the concept of states
-        // Learn more here: https://github.com/angular-ui/ui-router
-        // Set up the various states which the app can be in.
-        // Each state's controller can be found in controllers.js
-        $stateProvider
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
 
-            // setup an abstract state for the tabs directive
+  // setup an abstract state for the tabs directive
 
-            .state('login', {
-                url: "/login",
-                cache: false,
-                templateUrl: "templates/login.html",
-                controller: 'LoginCtrl'
-            })
+    .state('login', {
+    url: "/login",
+    cache: false,
+    templateUrl: "templates/login.html",
+    controller: 'LoginCtrl'
+  })
 
-            .state('app', {
-                url: "/app",
-                abstract: true,
-                cache: false,
-                templateUrl: "templates/menu.html",
-                controller: 'AppCtrl'
-            })
+  .state('app', {
+    url: "/app",
+    abstract: true,
+    cache: false,
+    templateUrl: "templates/menu.html",
+    controller: 'AppCtrl'
+  })
 
-            .state('app.doctors', {
-                url: "/doctors",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/doctors.html",
-                        controller: 'DoctorCtrl'
-                    }
-                }
-            })
+  .state('app.doctors', {
+    url: "/doctors",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/doctors.html",
+        controller: 'DoctorCtrl'
+      }
+    }
+  })
 
-            .state('app.report', {
-                url: "/report",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/report.html",
-                        controller: 'ReportCtrl'
-                    }
-                }
-            })
+  .state('app.report', {
+    url: "/report",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/report.html",
+        controller: 'ReportCtrl'
+      }
+    }
+  })
 
-            .state('app.doctor-details', {
-                url: '/doctor-patients/:doctorIndex',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/doctor-patients.html',
-                        controller: 'DoctorDetailsCtrl'
-                    }
-                }
-            })
+  .state('app.doctor-details', {
+    url: '/doctor-patients/:doctorIndex',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/doctor-patients.html',
+        controller: 'DoctorDetailsCtrl'
+      }
+    }
+  })
 
-            .state('app.patient-details', {
-                url: '/patientDetails/:patientIndex/:doctorInd',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/patient-details.html',
-                        controller: 'PatientDetailsCtrl'
-                    }
-                }
-            })
+  .state('app.patient-details', {
+    url: '/patientDetails/:patientIndex/:doctorInd',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/patient-details.html',
+        controller: 'PatientDetailsCtrl'
+      }
+    }
+  })
 
-            .state('app.add-patient', {
-                url: '/addPatient/:doctorInd',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addPatient.html',
-                        controller: 'AddPatientCtrl'
-                    }
-                }
-            })
+  .state('app.add-patient', {
+    url: '/addPatient/:doctorInd',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addPatient.html',
+        controller: 'AddPatientCtrl'
+      }
+    }
+  })
 
-            .state('app.add-doctor', {
-                cache: false,
-                url: '/doctorAdd',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addDoctor.html',
-                        controller: 'AddDoctorCtrl'
-                    }
-                }
-            })
+  .state('app.add-doctor', {
+    cache: false,
+    url: '/doctorAdd',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addDoctor.html',
+        controller: 'AddDoctorCtrl'
+      }
+    }
+  })
 
-            .state('app.edit-doctor', {
-                url: '/editDoctor/:doctorIndex',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addDoctor.html',
-                        controller: 'EditDoctorCtrl'
-                    }
-                }
-            })
+  .state('app.edit-doctor', {
+    url: '/editDoctor/:doctorIndex',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addDoctor.html',
+        controller: 'EditDoctorCtrl'
+      }
+    }
+  })
 
-            .state('app.add-txn', {
-                cache: false,
-                url: '/txnAdd/:patientIndex/:doctorInd',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addTxn.html',
-                        controller: 'AddTxnCtrl'
-                    }
-                }
-            })
+  .state('app.add-txn', {
+    cache: false,
+    url: '/txnAdd/:patientIndex/:doctorInd',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addTxn.html',
+        controller: 'AddTxnCtrl'
+      }
+    }
+  })
 
-            .state('app.edit-patient', {
-                url: '/editPatient/:patientIndex/:doctorInd',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addPatient.html',
-                        controller: 'EditPatientCtrl'
-                    }
-                }
-            })
+  .state('app.edit-patient', {
+    url: '/editPatient/:patientIndex/:doctorInd',
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addPatient.html',
+        controller: 'EditPatientCtrl'
+      }
+    }
+  })
 
-            .state('app.edit-txn', {
-                cache: false,
-                url: '/txnedit/:patientIndex/:doctorInd/:txnInd',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/addTxn.html',
-                        controller: 'EditTxnCtrl'
-                    }
-                }
-            })
+  .state('app.edit-txn', {
+    cache: false,
+    url: '/txnedit/:patientIndex/:doctorInd/:txnInd',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/addTxn.html',
+        controller: 'EditTxnCtrl'
+      }
+    }
+  })
 
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/doctors');
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/doctors');
 
-    });
+});
